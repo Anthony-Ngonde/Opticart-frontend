@@ -4,7 +4,7 @@ import { Card, Button, ListGroup } from 'react-bootstrap';
 function ShoppingCart({ cartItems = [], removeFromCart }) {
     const calculateTotalPrice = () => {
         return cartItems.reduce((total, item) => {
-            const price = typeof item.price === 'number' ? item.price : 0;
+            const price = typeof item.price === 'number' ? item.price * item.quantity : 0;
             return total + price;
         }, 0).toFixed(2);
     };
@@ -23,8 +23,8 @@ function ShoppingCart({ cartItems = [], removeFromCart }) {
                                     <div style={{ display: 'flex', alignItems: 'center' }}>
                                         <img src={item.image} alt="" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
                                         <div>
-                                            <div>{item.name}</div>
-                                            <div>${Number(item.price).toFixed(2)}</div>
+                                            <div>{item.name} x {item.quantity}</div>
+                                            <div>${(item.price * item.quantity).toFixed(2)}</div>
                                         </div>
                                     </div>
                                     <Button variant="danger" onClick={() => removeFromCart(index)}>Remove</Button>

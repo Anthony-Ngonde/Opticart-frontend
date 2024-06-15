@@ -33,7 +33,15 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
-    setCartItems([...cartItems, product]);
+    const existingProductIndex = cartItems.findIndex((item) => item.name === product.name);
+    if (existingProductIndex !== -1) {
+      const newCartItems = cartItems.map((item, index) => 
+        index === existingProductIndex ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCartItems(newCartItems);
+    } else {
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
   };
 
   const removeFromCart = (index) => {
