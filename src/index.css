@@ -163,3 +163,40 @@ body {
   border-radius: 4px;
   width: 100%;
 }
+
+.proceed-button {
+  background-color: orange;
+  border: none;
+  width: 100%;
+  text-align: center;
+}
+
+.checkout-button {
+  background-color: orange;
+  border: none;
+  width: 100%;
+  text-align: center;
+}
+
+.continue-button, .customize-button {
+  width: 48%;
+  background-color: orange;
+  border: none;
+  margin: 1%;
+  text-align: center;
+}
+
+.lens-customization-form {
+  padding: 10px;
+}
+
+.lens-customization-form .form-group {
+  margin-bottom: 15px;
+}
+
+.lens-customization-form .submit-button {
+  background-color: orange;
+  border: none;
+  width: 100%;
+  text-align: center;
+}
