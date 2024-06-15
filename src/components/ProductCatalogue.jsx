@@ -1,9 +1,6 @@
 import { Card, Button } from 'react-bootstrap';
 
 
-
-
-
 function ProductCatalogue({ image, price, name, addToCart }) {
   return (
     <div>
@@ -24,4 +21,4 @@ function ProductCatalogue({ image, price, name, addToCart }) {
   );
 }
 
-export default ProductCatalogue;
+export default ProductCatalogue; 

@@ -1,5 +1,5 @@
 import Container from 'react-bootstrap/Container';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Form } from 'react-bootstrap';
 import { useState } from 'react';
 
 
@@ -7,6 +7,7 @@ import ProductCatalogue from '../components/ProductCatalogue';
 import NavBar from '../components/Navbar';
 import Header from '../components/Header';
 import ShoppingCart from '../components/ShoppingCart';
+
 
 
 
@@ -31,6 +32,7 @@ const products = [
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const [sortOrder, setSortOrder] = useState('');
 
   const addToCart = (product) => {
     const existingProductIndex = cartItems.findIndex((item) => item.name === product.name);
@@ -49,15 +51,38 @@ function App() {
     setCartItems(newCartItems);
   };
 
+  const handleSortChange = (event) => {
+    setSortOrder(event.target.value);
+  };
+
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sortOrder === 'lowest') {
+      return a.price - b.price;
+    } else if (sortOrder === 'highest') {
+      return b.price - a.price;
+    } else {
+      return 0;
+    }
+  });
+
   return (
     <>
       <NavBar />
       <Header />
       <Container className='mt-10' style={{ marginTop: 100 }}>
+        <Row className='mb-3'>
+          <Col md={12}>
+            <Form.Select aria-label="Sort products" onChange={handleSortChange} value={sortOrder}>
+              <option value="">Sort by</option>
+              <option value="lowest">Price: Low to High</option>
+              <option value="highest">Price: High to Low</option>
+            </Form.Select>
+          </Col>
+        </Row>
         <Row>
           <Col md={8}>
             <Row>
-              {products.map((product, index) => (
+              {sortedProducts.map((product, index) => (
                 <Col key={index} className='mb-5'>
                   <ProductCatalogue
                     image={product.image}
@@ -78,4 +103,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
