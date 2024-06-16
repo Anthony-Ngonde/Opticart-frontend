@@ -1,12 +1,15 @@
 import Container from 'react-bootstrap/Container';
-import { Col, Row, Form } from 'react-bootstrap';
 import { useState } from 'react';
+
+import { Col, Row, Form } from 'react-bootstrap';
+import { useRoutes, Link } from 'react-router-dom';
 
 
 import ProductCatalogue from '../components/ProductCatalogue';
 import NavBar from '../components/Navbar';
 import Header from '../components/Header';
 import ShoppingCart from '../components/ShoppingCart';
+import OrderForm from '../components/OrderForm';
 
 
 
@@ -65,23 +68,20 @@ function App() {
     }
   });
 
-  return (
-    <>
-      <NavBar />
-      <Header />
-      <Container className='mt-10' style={{ marginTop: 100 }}>
-        <Row className='mb-3'>
-          <Col md={12}>
-            <Form.Select aria-label="Sort products" onChange={handleSortChange} value={sortOrder}>
-              <option value="">Sort by</option>
-              <option value="lowest">Price: Low to High</option>
-              <option value="highest">Price: High to Low</option>
-            </Form.Select>
-          </Col>
-        </Row>
+  const routes = useRoutes([
+    {
+      path: "/",
+      element: (
         <Row>
           <Col md={8}>
             <Row>
+              <Col md={12} className='mb-3'>
+                <Form.Select aria-label="Sort products" onChange={handleSortChange} value={sortOrder}>
+                  <option value="">Sort by</option>
+                  <option value="lowest">Price: Low to High</option>
+                  <option value="highest">Price: High to Low</option>
+                </Form.Select>
+              </Col>
               {sortedProducts.map((product, index) => (
                 <Col key={index} className='mb-5'>
                   <ProductCatalogue
@@ -96,11 +96,26 @@ function App() {
           </Col>
           <Col md={4}>
             <ShoppingCart cartItems={cartItems} removeFromCart={removeFromCart} />
+            <Link to="/order-form" className="btn btn-primary mt-3">Go to Order Form</Link> {/* Add Link to order form */}
           </Col>
         </Row>
+      ),
+    },
+    {
+      path: "order-form",
+      element: <OrderForm />,
+    },
+  ]);
+
+  return (
+    <>
+      <NavBar />
+      <Header />
+      <Container className='mt-10' style={{ marginTop: 100 }}>
+        {routes}
       </Container>
     </>
   );
 }
 
-export default App; 
+export default App;

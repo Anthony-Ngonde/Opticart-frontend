@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Card, Button, ListGroup, Form } from 'react-bootstrap';
 import LensCustomization from './LensCustomization';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function ShoppingCart({ cartItems = [], removeFromCart }) {
     const [showForm, setShowForm] = useState(false);
-    const [showCustomization, setShowCustomization] = useState(false);
+    const navigate = useNavigate();
 
     const calculateTotalPrice = () => {
         return cartItems.reduce((total, item) => {
@@ -21,12 +22,13 @@ function ShoppingCart({ cartItems = [], removeFromCart }) {
 
     const handleCheckoutClick = (event) => {
         event.preventDefault();
-        setShowCustomization(true);
+        const itemPurchased = cartItems.map(item => `${item.name} x ${item.quantity}`).join(', ');
+        navigate('/order-form', { state: { itemPurchased } });
     };
 
-    const handleContinueClick = () => {
-        // Handle order placement here
-        alert("Order placed!");
+    const handleCustomizationClick = () => {
+        const itemPurchased = cartItems.map(item => `${item.name} x ${item.quantity}`).join(', ');
+        navigate('/lens-customization', { state: { itemPurchased } });
     };
 
     return (
@@ -65,31 +67,13 @@ function ShoppingCart({ cartItems = [], removeFromCart }) {
                     </>
                 )}
             </ListGroup>
-            {showForm && !showCustomization && (
-                <Form onSubmit={handleCheckoutClick} style={{ padding: '10px' }}>
-                    <Form.Group controlId="formName">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter your name" required />
-                    </Form.Group>
-                    <Form.Group controlId="formEmail" className="mt-3">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter your email" required />
-                    </Form.Group>
-                    <Form.Group controlId="formAddress" className="mt-3">
-                        <Form.Label>Address</Form.Label>
-                        <Form.Control type="text" placeholder="Enter your address" required />
-                    </Form.Group>
-                    <Button className="checkout-button mt-3" type="submit">Checkout</Button>
+            {showForm && (
+                <Form style={{ padding: '10px' }}>
+                    <div className="d-flex justify-content-between mt-3">
+                        <Button className="checkout-button" onClick={handleCheckoutClick}>Checkout</Button>
+                        <Button className="customize-button" onClick={handleCustomizationClick}>Lens Customization</Button>
+                    </div>
                 </Form>
-            )}
-            {showCustomization && (
-                <div style={{ padding: '10px' }}>
-                    <Button className="continue-button" onClick={handleContinueClick}>Continue</Button>
-                    <Button className="customize-button" onClick={() => setShowCustomization(false)}>Lens Customization</Button>
-                </div>
-            )}
-            {!showCustomization && showForm && (
-                <LensCustomization />
             )}
         </Card>
     );

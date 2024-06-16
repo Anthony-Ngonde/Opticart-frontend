@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 
 
 
@@ -10,6 +12,10 @@ function LensCustomization() {
         pd: '',
         lensMaterial: ''
     });
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { state } = location;
+    const { itemPurchased } = state || {};
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -18,9 +24,8 @@ function LensCustomization() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log('Form Data Submitted:', formData);
-        alert("Lens customization submitted!");
+        // Navigate to order form with lens customization data
+        navigate('/order-form', { state: { itemPurchased, lensCustomization: formData } });
     };
 
     return (
