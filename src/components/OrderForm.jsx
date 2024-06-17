@@ -7,15 +7,13 @@ import { BASE_URL } from '../utils';
 
 
 function OrderForm() {
-
-
     const [glasses, setGlasses] = useState([]);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         address: '',
-        itemPurchased: '',
-        totalPrice: '',
+        item_purchased: '',
+        total_price: '',
     });
 
     useEffect(() => {
@@ -28,7 +26,7 @@ function OrderForm() {
         .then(res => res.json())
         .then((data) => {
             console.log(data);
-            setGlasses(data); // If you want to do something with the fetched glasses data
+            setGlasses(data);
         })
         .catch((err) => console.log(err));
     }, []);
@@ -41,26 +39,45 @@ function OrderForm() {
         if (state) {
             setFormData(prevData => ({
                 ...prevData,
-                itemPurchased: itemPurchased || '',
-                totalPrice: totalPrice || '',
+                item_purchased: itemPurchased || '',
+                total_price: totalPrice || '',
             }));
         }
     }, [state, itemPurchased, totalPrice]);
 
     const handleInputChange = (e) => {
         const { id, value } = e.target;
-        setFormData(prevData => {
-            const newData = { ...prevData, [id]: value };
-            console.log(newData);
-            return newData;
-        });
+        setFormData(prevData => ({
+            ...prevData, [id]: value
+        }));
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Handle form submission logic here
-        alert("Order submitted!");
-        console.log(formData);
+        
+        // Log formData before submitting
+        console.log("Submitting form data:", formData);
+        
+        try {
+            const response = await fetch(`${BASE_URL}/order`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            if (response.ok) {
+                alert("Order submitted!");
+                console.log(formData);
+            } else {
+                const errorData = await response.json();
+                console.error('Error submitting order:', errorData);
+                alert('Failed to submit order!');
+            }
+        } catch (error) {
+            console.error('There was an error submitting the order!', error);
+            alert('An error occurred while submitting the order.');
+        }
     };
 
     return (
@@ -97,19 +114,19 @@ function OrderForm() {
                         required
                     />
                 </Form.Group>
-                <Form.Group controlId="itemPurchased" className="mt-3">
+                <Form.Group controlId="item_purchased" className="mt-3">
                     <Form.Label>Item Purchased</Form.Label>
                     <Form.Control
                         type="text"
-                        value={formData.itemPurchased}
+                        value={formData.item_purchased}
                         readOnly
                     />
                 </Form.Group>
-                <Form.Group controlId="totalPrice" className="mt-3">
+                <Form.Group controlId="total_price" className="mt-3">
                     <Form.Label>Total Price</Form.Label>
                     <Form.Control
                         type="text"
-                        value={formData.totalPrice}
+                        value={formData.total_price}
                         readOnly
                     />
                 </Form.Group>
