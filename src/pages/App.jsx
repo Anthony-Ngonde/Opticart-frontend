@@ -1,7 +1,5 @@
-import Container from 'react-bootstrap/Container';
-import { useState } from 'react';
-
-import { Col, Row, Form } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Col, Row, Form } from 'react-bootstrap';
 import { useRoutes, Link } from 'react-router-dom';
 
 import ProductCatalogue from '../components/ProductCatalogue';
@@ -9,6 +7,7 @@ import NavBar from '../components/Navbar';
 import Header from '../components/Header';
 import ShoppingCart from '../components/ShoppingCart';
 import OrderForm from '../components/OrderForm';
+import Footer from '../components/Footer';
 
 const products = [
 { image: "https://i.pinimg.com/236x/47/85/04/4785040eca2a6df5cdd89f2beaf47548.jpg", price: 20, name: 'Large Round Circle Frame' },
@@ -28,6 +27,7 @@ const products = [
 { image: "https://i.pinimg.com/236x/50/25/0d/50250d2d506ff98adcb5b6240ffb2148.jpg", price: 15, name: 'Feline Chic Frames' },
 { image: "https://i.pinimg.com/236x/39/ae/dc/39aedc06e0b74952283f49f467a36a61.jpg", price: 20, name: 'CatEye Geometric Glasses' },
 ];
+
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -110,6 +110,7 @@ function App() {
       <Container className='mt-10' style={{ marginTop: 100 }}>
         {routes}
       </Container>
+      <Footer /> {/* Include the Footer component */}
     </>
   );
 }

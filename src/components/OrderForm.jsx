@@ -105,7 +105,7 @@ function OrderForm() {
                     />
                 </Form.Group>
                 <Form.Group controlId="address" className="mt-3">
-                    <Form.Label>Location</Form.Label>
+                    <Form.Label>Addres</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Enter your address"
