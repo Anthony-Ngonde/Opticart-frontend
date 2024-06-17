@@ -24,7 +24,7 @@ function LensCustomization() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Navigate to order form with lens customization data
+
         navigate('/order-form', { state: { itemPurchased, totalPrice, lensCustomization: formData } });
     };
 
