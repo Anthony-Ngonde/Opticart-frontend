@@ -140,4 +140,4 @@ https://github.com/Anthony-Ngonde/Opticart-backend.git
 ### 5 Minute Video Explaining my Project Link
 /home/anthony/Videos/Screencasts/Screencast from 17-06-2024 08:33:41 ALASIRI.webm
 
-- Copy the link above and paste it to the browser to see my video
+- Copy the link above and paste it to the browser to see my video.
