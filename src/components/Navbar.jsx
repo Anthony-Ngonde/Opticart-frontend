@@ -8,24 +8,21 @@ function NavBar() {
     <>
       <Navbar collapseOnSelect expand="lg" className="navbar mb-5">
         <Container>
-          <Navbar.Brand href="#home" className="navbar-brand">OptiCart</Navbar.Brand>
+          <Navbar.Brand href="/" className="navbar-brand">OptiCart</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" />
           <Navbar.Collapse id="responsive-navbar-nav" className="navbar-collapse">
             <Nav className="me-auto"></Nav>
             <Nav>
-              <Nav.Link href="#features" className="nav-link">
-                <button className="custom-button">Product Catalogue</button>
-              </Nav.Link>
-              <Nav.Item href="#customization" className="nav-link">
+              <Nav.Item className="nav-link">
                 <NavLink to="/lens-customization">
-                <button className="custom-button">
-                    Lens Customization
-                    </button>
+                  <button className="custom-button">Lens Customization</button>
                 </NavLink>
               </Nav.Item>
-              <Nav.Link eventKey={2} href="#about" className="nav-link">
-                <button className="custom-button">Admin</button>
-              </Nav.Link>
+              <Nav.Item className="nav-link">
+                <NavLink to="/admin">
+                  <button className="custom-button">Admin</button>
+                </NavLink>
+              </Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Container>

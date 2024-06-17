@@ -15,7 +15,7 @@ function LensCustomization() {
     const navigate = useNavigate();
     const location = useLocation();
     const { state } = location;
-    const { itemPurchased } = state || {};
+    const { itemPurchased, totalPrice } = state || {};
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,7 +25,7 @@ function LensCustomization() {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Navigate to order form with lens customization data
-        navigate('/order-form', { state: { itemPurchased, lensCustomization: formData } });
+        navigate('/order-form', { state: { itemPurchased, totalPrice, lensCustomization: formData } });
     };
 
     return (

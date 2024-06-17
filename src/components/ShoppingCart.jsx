@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Button, ListGroup, Form } from 'react-bootstrap';
-import LensCustomization from './LensCustomization';
 import { useNavigate } from 'react-router-dom';
+import LensCustomization from './LensCustomization';
 
 
 
@@ -23,12 +23,14 @@ function ShoppingCart({ cartItems = [], removeFromCart }) {
     const handleCheckoutClick = (event) => {
         event.preventDefault();
         const itemPurchased = cartItems.map(item => `${item.name} x ${item.quantity}`).join(', ');
-        navigate('/order-form', { state: { itemPurchased } });
+        const totalPrice = calculateTotalPrice();
+        navigate('/order-form', { state: { itemPurchased, totalPrice } });
     };
 
     const handleCustomizationClick = () => {
         const itemPurchased = cartItems.map(item => `${item.name} x ${item.quantity}`).join(', ');
-        navigate('/lens-customization', { state: { itemPurchased } });
+        const totalPrice = calculateTotalPrice();
+        navigate('/lens-customization', { state: { itemPurchased, totalPrice } });
     };
 
     return (
