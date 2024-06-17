@@ -132,3 +132,12 @@ This project is licensed under the MIT License.
 - This `README.md` file includes instructions for setting up both the frontend and backend parts of the application.
 - It provides commands for installing dependencies, running the development servers, and setting up the SQLite database.
 - API endpoint information is provided to help users understand how to interact with the backend.
+
+### Backend Repo Url
+https://github.com/Anthony-Ngonde/Opticart-backend.git
+
+
+### 5 Minute Video Explaining my Project Link
+/home/anthony/Videos/Screencasts/Screencast from 17-06-2024 08:33:41 ALASIRI.webm
+
+- Copy the link above and paste it to the browser to see my video

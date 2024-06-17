@@ -4,8 +4,6 @@ import { Form, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { BASE_URL } from '../utils';
 
-
-
 function OrderForm() {
     const [glasses, setGlasses] = useState([]);
     const [formData, setFormData] = useState({
@@ -55,7 +53,7 @@ function OrderForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         
-       
+        // Log formData before submitting
         console.log("Submitting form data:", formData);
         
         try {
@@ -105,7 +103,7 @@ function OrderForm() {
                     />
                 </Form.Group>
                 <Form.Group controlId="address" className="mt-3">
-                    <Form.Label>Addres</Form.Label>
+                    <Form.Label>Address</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Enter your address"
